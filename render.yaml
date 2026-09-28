@@ -1,0 +1,15 @@
+# Render.com free-tier blueprint (optional).
+# In Render: New + → Blueprint → point it at your GitHub repo → Apply.
+# Free tier notes: service sleeps after ~15 min idle (first visit wakes it,
+# ~30-60 s); the disk is ephemeral, so demo data reseeds on restart/redeploy.
+services:
+  - type: web
+    name: aiia-trialops
+    runtime: node
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
